@@ -13,7 +13,7 @@ def search_less(web, word):
     try:
         warnings.simplefilter('ignore', ResourceWarning)
         web.get('https://zh.moegirl.org.cn/'+word)
-        WebDriverWait(web, 10).until(EC.presence_of_element_located((By.ID, 'mw-body')))
+        WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         element = web.find_element(By.ID, 'mw-body')
         web.set_window_size(1920, 1080)
         img = element.screenshot_as_base64
@@ -22,31 +22,30 @@ def search_less(web, word):
         
         web.execute_script(js)
         return img
-    except:
+    except Exception as e:
+        with open('./printlog.txt', 'a+') as f:
+            f.write('发生了一个错误: 2022/7/28'+str(e))
         return 0
 
 def search_more(web, word):
     try:
         web.get('https://zh.moegirl.org.cn/'+word)
-        WebDriverWait(web, 10).until(EC.presence_of_element_located((By.ID, 'mw-body')))
+        WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         element = web.find_element(By.ID, 'mw-body')
-        web.set_window_size(element.size['width'], element.size['height'])
+        if element.size['height'] > 8000:
+            web.set_window_size(element.size['width'], 8000)
+        else:
+            web.set_window_size(element.size['width'], element.size['height'])
         img = element.screenshot_as_base64
         js = '''
                 document.getElementById('mw-body').remove() '''
         
         web.execute_script(js)
         return img
-    except:
+    except Exception as e:
+        with open('./printlog.txt', 'a+') as f:
+            f.write('发生了一个错误: 2022/7/28'+str(e))
         return 0
     
 
-if __name__ == "__main__":
-    options = ChromeOptions()
-    options.add_argument('--disable-software-rasterizer')
-    options.add_argument('-ignore-certificate-errors')
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    web = webdriver.Chrome(options=options)
-    search_less(web=web, word='栗山未来')
 
