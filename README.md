@@ -9,7 +9,7 @@ https://blog.csdn.net/momoda118/article/details/118719610?ops_request_misc=%257B
 ***
 ## 插件功能一览
 ![image](https://user-images.githubusercontent.com/93362741/181442112-d261e7c0-c29f-4746-98fe-0e5691d90b78.png)
-![image](https://user-images.githubusercontent.com/93362741/181442426-0f26b8e0-8bea-4be6-873a-179af8385881.png)
+![image](https://user-images.githubusercontent.com/93362741/181445466-5afda7e2-4ae6-40ee-9dd7-f897374b5e4e.png)
 ***
 ***
 ### 目前支持搜狗百科与萌娘百科。
