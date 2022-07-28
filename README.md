@@ -12,7 +12,8 @@ https://blog.csdn.net/momoda118/article/details/118719610?ops_request_misc=%257B
 ![image](https://user-images.githubusercontent.com/93362741/181445466-5afda7e2-4ae6-40ee-9dd7-f897374b5e4e.png)
 ***
 ***
-### 目前支持搜狗百科与萌娘百科。
+## 目前支持搜狗百科与萌娘百科。
+### 注：只有添加管理员后才可以使用切换模式与切换引擎功能
 ![`PLXFXDL`$2XY~X(JZ47NA5](https://user-images.githubusercontent.com/93362741/181443389-547edcb6-f60d-4b8b-96ec-23e45236738e.png)
 
 ## TXT里填写json老是有人填错，要么是用了中文的引号，或者逗号，要么是格式填写错误，所以换成了表格形式。
