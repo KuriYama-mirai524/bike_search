@@ -20,4 +20,6 @@ https://blog.csdn.net/momoda118/article/details/118719610?ops_request_misc=%257B
 ![image](https://user-images.githubusercontent.com/93362741/181444602-f80ec4ec-b4c3-42d5-8eca-d769ff318b7a.png)
 ![image](https://user-images.githubusercontent.com/93362741/181444823-fdd6bedb-c2a0-4d10-b272-2bba8d9ea7ae.png)![image](https://user-images.githubusercontent.com/93362741/181444914-bcf60003-3dc3-4f01-843d-5b3f95d98b87.png)
 
+## linux上配置好驱动后运行main.py即可
+
 
