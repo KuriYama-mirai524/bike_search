@@ -10,5 +10,14 @@ https://blog.csdn.net/momoda118/article/details/118719610?ops_request_misc=%257B
 ## 插件功能一览
 ![image](https://user-images.githubusercontent.com/93362741/181442112-d261e7c0-c29f-4746-98fe-0e5691d90b78.png)
 ![image](https://user-images.githubusercontent.com/93362741/181442426-0f26b8e0-8bea-4be6-873a-179af8385881.png)
-![UK 3$CY0B8N1J{P)DX$$$~R](https://user-images.githubusercontent.com/93362741/181442452-08181e45-92c6-42f3-a5c1-db357d5f3fc6.png)
+***
+***
+### 目前支持搜狗百科与萌娘百科。
+![`PLXFXDL`$2XY~X(JZ47NA5](https://user-images.githubusercontent.com/93362741/181443389-547edcb6-f60d-4b8b-96ec-23e45236738e.png)
+
+## TXT里填写json老是有人填错，要么是用了中文的引号，或者逗号，要么是格式填写错误，所以换成了表格形式。
+### 填写对应要求的参数保存即可
+![image](https://user-images.githubusercontent.com/93362741/181444602-f80ec4ec-b4c3-42d5-8eca-d769ff318b7a.png)
+![image](https://user-images.githubusercontent.com/93362741/181444823-fdd6bedb-c2a0-4d10-b272-2bba8d9ea7ae.png)![image](https://user-images.githubusercontent.com/93362741/181444914-bcf60003-3dc3-4f01-843d-5b3f95d98b87.png)
+
 
