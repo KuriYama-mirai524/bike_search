@@ -14,7 +14,7 @@
 
 
 5. 启动chromedriver服务
-6. ![image](https://user-images.githubusercontent.com/93362741/184267861-5096347f-de2b-4907-a2d6-0a27768091cd.png)
+6. ![image](https://user-images.githubusercontent.com/93362741/184268034-fe890975-5bf1-4b32-b789-88a780cdf675.png)
 
 7. 如果想在linux上跑，请作好花费不少时间折腾的心理准备，可以参考这篇[教程](
 https://blog.csdn.net/momoda118/article/details/118719610?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165899137516781667834626%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=165899137516781667834626&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-4-118719610-null-null.142^v35^experiment_28w_v1,185^v2^tag_show&utm_term=linux%E5%AE%89%E8%A3%85chromedriver&spm=1018.2226.3001.4187)
