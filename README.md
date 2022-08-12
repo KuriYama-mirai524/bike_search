@@ -8,7 +8,7 @@
 2. 安装指定版本的[谷歌浏览器(点击直链下载)](http://redirector.gvt1.com/edgedl/release2/chrome/acqkdyz3x6ktjenzze3rojk4hs5a_92.0.4515.107/92.0.4515.107_chrome_installer.exe)
 3. 安装对应版本的[Chromedriver(点击直链下载)](https://registry.npmmirror.com/-/binary/chromedriver/92.0.4515.107/chromedriver_win32.zip)
 ## 下载完chromedriver，将它添加到环境变量
-![image](https://user-images.githubusercontent.com/93362741/184267115-65c0dd2a-0a09-4e16-8622-078da5be8b70.png)
+![image](https://user-images.githubusercontent.com/93362741/184267336-d320a63f-50c9-4f12-8dde-ec708b5affca.png)
 
 
 
