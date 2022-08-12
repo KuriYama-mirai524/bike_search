@@ -13,8 +13,10 @@
 
 
 
-5. 根据[教程](https://blog.csdn.net/shykevin/article/details/108802053?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164489415616780271548606%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164489415616780271548606&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-108802053.first_rank_v2_pc_rank_v29&utm_term=selenium%E5%AE%89%E8%A3%85chrome%E9%A9%B1%E5%8A%A8&spm=1018.2226.3001.4187)启动chromedriver服务(一！定！要！先！添！加！到！系！统！环！境！变！量！)
-6. 如果想在linux上跑，请作好花费不少时间折腾的心理准备，可以参考这篇[教程](
+5. 启动chromedriver服务
+6. ![image](https://user-images.githubusercontent.com/93362741/184267861-5096347f-de2b-4907-a2d6-0a27768091cd.png)
+
+7. 如果想在linux上跑，请作好花费不少时间折腾的心理准备，可以参考这篇[教程](
 https://blog.csdn.net/momoda118/article/details/118719610?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522165899137516781667834626%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=165899137516781667834626&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-4-118719610-null-null.142^v35^experiment_28w_v1,185^v2^tag_show&utm_term=linux%E5%AE%89%E8%A3%85chromedriver&spm=1018.2226.3001.4187)
 ***
 ## 插件功能一览
