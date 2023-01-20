@@ -6,11 +6,14 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 def search_less(web, word):
     try:
+        web.set_page_load_timeout(5)
         try:
             web.get('https://zh.moegirl.org.cn/' + word)
         except TimeoutException:
             pass
-        print("Start wait...")
+        if web.find_element(By.CSS_SELECTOR, ".n-card"):
+            web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[3]/div/button').click()
+            print("关闭公告")
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
@@ -20,19 +23,24 @@ def search_less(web, word):
                 document.getElementById('mw-body').remove() '''
 
         web.execute_script(js)
+        web.set_page_load_timeout(10)
         return img
     except Exception as e:
         print('发生了一个错误: '+str(e))
+        web.set_page_load_timeout(10)
         return 0
 
 
 def search_more(web, word):
     try:
+        web.set_page_load_timeout(5)
         try:
             web.get('https://zh.moegirl.org.cn/' + word)
         except TimeoutException:
             pass
-        print("Start wait...")
+        if web.find_element(By.CSS_SELECTOR, ".n-card"):
+            web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[3]/div/button').click()
+            print("关闭公告")
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
@@ -45,7 +53,9 @@ def search_more(web, word):
                 document.getElementById('mw-body').remove() '''
 
         web.execute_script(js)
+        web.set_page_load_timeout(10)
         return img
     except Exception as e:
         print('发生了一个错误: '+str(e))
+        web.set_page_load_timeout(10)
         return 0
