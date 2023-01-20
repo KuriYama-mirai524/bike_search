@@ -45,6 +45,7 @@ WEB_DRIVER.get('https://baike.sogou.com/')
 # 开始监听会话
 while True:
     msg = simuse.fetch_message(host=HOST, session=SESSION, deal=1)
+    print(msg)
 
     if msg == 0:
         continue
@@ -95,7 +96,7 @@ while True:
             t1 = time.time()
             sender.send_image(group=group, session=SESSION, message=img, host=HOST)
             print('Sent! [{}s]'.format(time.time() - t1))
-        elif '/切换模式' in msg:  # 更换搜索模式
+        elif msg == '/切换模式':  # 更换搜索模式
             if sender in ADMIN_QQ:
                 if LITE_MODE == '是':
                     LITE_MODE = '否'
@@ -105,7 +106,7 @@ while True:
                     sender.send_str(group=group, session=SESSION, message='切换成功，当前为简略搜索', host=HOST)
             else:
                 sender.send_str(group=group, session=SESSION, message='只有管理员可以切换模式', host=HOST)
-        elif '/切换引擎' in msg:  # 更换搜索引擎
+        elif msg == '/切换引擎':  # 更换搜索引擎
             if sender in ADMIN_QQ:
                 if DRIVER == '搜狗百科':
                     DRIVER = '萌娘百科'
@@ -114,7 +115,6 @@ while True:
                     DRIVER = '搜狗百科'
                     sender.send_str(group=group, session=SESSION, message='当前引擎切换为搜狗百科', host=HOST)
                     WEB_DRIVER.get('https://baike.sogou.com/')
-
             else:
                 sender.send_str(group=group, session=SESSION, message='只有管理员可以切换引擎', host=HOST)
     except Exception:

@@ -64,7 +64,7 @@ def get_session(data, getsession=0):
 
 
 # 接收消息 (若传入deal=0，则表示返回不经过简化的原消息信息和事件)
-def fetch_message(host, session, deal=1, ):
+def fetch_message(host, session, deal=1):
     url = host + '/fetchMessage?sessionKey=' + session
     res = r.request('get', url)
     res = json.loads(res.text)
