@@ -37,8 +37,7 @@ def search(web, word, isLite=False):
             web.get('https://baike.sogou.com/')
             return img
     except Exception as e:
-        print('发生了一个错误: ')
-        traceback.print_last()
+        print('发生了一个错误: '+str(e))
         web.get('https://baike.sogou.com/')
         return 0
 

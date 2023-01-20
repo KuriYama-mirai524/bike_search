@@ -116,7 +116,6 @@ while True:
             else:
                 msg_sender.send_str(group=group, session=SESSION, message='只有管理员可以切换引擎', host=HOST)
     except Exception as e:
-        print('发生了一个错误: ')
-        traceback.print_last()
+        print('发生了一个错误: '+str(e))
 
     time.sleep(1)
