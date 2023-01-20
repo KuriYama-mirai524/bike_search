@@ -21,13 +21,10 @@ def search(web, word, isLite=False):
         WebDriverWait(web, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'lemma_container')))
         element = web.find_element(By.CLASS_NAME, 'lemma_container')
 
-        if not isLite:
+        if isLite:
             web.set_window_size(element.size['width'], element.size['height'])
             img = web.find_element(By.CLASS_NAME, 'abstract_wrap').screenshot_as_base64
-            js = '''
-                    document.getElementsByClassName('lemma_container')[0].remove() '''
-
-            web.execute_script(js)
+            web.get('https://baike.sogou.com/')
             return img
         else:
             if element.size['height'] > 8000:
@@ -35,10 +32,7 @@ def search(web, word, isLite=False):
             else:
                 web.set_window_size(element.size['width'], element.size['height'])
             img = web.find_element(By.CLASS_NAME, 'lemma_container').screenshot_as_base64
-            js = '''
-                    document.getElementsByClassName('lemma_container')[0].remove() '''
-
-            web.execute_script(js)
+            web.get('https://baike.sogou.com/')
             return img
     except Exception as e:
         print('发生了一个错误: ' + str(e))
