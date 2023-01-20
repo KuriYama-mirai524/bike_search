@@ -45,7 +45,6 @@ WEB_DRIVER.get('https://baike.sogou.com/')
 # 开始监听会话
 while True:
     msg = simuse.fetch_message(host=HOST, session=SESSION, deal=1)
-    print(msg)
 
     if msg == 0:
         continue

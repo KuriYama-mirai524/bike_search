@@ -79,10 +79,10 @@ def fetch_message(host, session, deal=1):
 
 
 # 接受消息/事件信息(简化处理)
-def fetch_message_info(Message):
+def fetch_message_info(message):
     messageinfo = dict()
     message_c = []
-    for i in Message:
+    for i in message:
         if i['type'] != 'GroupMessage' and i['type'] != 'FriendMessage':
             message_c.append(i.copy())
         else:
@@ -94,7 +94,9 @@ def fetch_message_info(Message):
                 groupinfo = senderinfo['group']
                 messageinfo.update(group=groupinfo['id'])
             message_c.append(messageinfo.copy())
-    if str(message_c) == '[]':
+
+    print(message_c)
+    if len(message_c) == 0:
         return 0
     else:
         return message_c
