@@ -7,10 +7,9 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 def search_less(web, word):
     try:
-        warnings.simplefilter('ignore', ResourceWarning)
         web.get('https://zh.moegirl.org.cn/' + word)
         print("Start wait...")
-        WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
+        element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
         web.set_window_size(1920, 1080)
@@ -29,7 +28,7 @@ def search_more(web, word):
     try:
         web.get('https://zh.moegirl.org.cn/' + word)
         print("Start wait...")
-        WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
+        element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
         if element.size['height'] > 8000:

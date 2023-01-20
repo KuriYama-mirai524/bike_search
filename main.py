@@ -113,7 +113,7 @@ while True:
                     WEB_DRIVER.get('https://baike.sogou.com/')
             else:
                 msg_sender.send_str(group=group, session=SESSION, message='只有管理员可以切换引擎', host=HOST)
-    except Exception:
-        continue
+    except Exception as e:
+        print('发生了一个错误: ' + str(e))
 
     time.sleep(1)
