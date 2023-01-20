@@ -1,3 +1,4 @@
+import traceback
 import warnings
 
 from selenium.webdriver.common.by import By
@@ -20,7 +21,8 @@ def search_less(web, word):
         web.execute_script(js)
         return img
     except Exception as e:
-        print('发生了一个错误: ' + str(e))
+        print('发生了一个错误: ')
+        traceback.print_last()
         return 0
 
 
@@ -42,5 +44,6 @@ def search_more(web, word):
         web.execute_script(js)
         return img
     except Exception as e:
-        print('发生了一个错误: ' + str(e))
+        print('发生了一个错误: ')
+        traceback.print_last()
         return 0
