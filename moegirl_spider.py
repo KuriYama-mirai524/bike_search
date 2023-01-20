@@ -12,8 +12,8 @@ def search_less(web, word):
         except TimeoutException:
             pass
         if web.find_element(By.CSS_SELECTOR, ".n-card"):
-            web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[3]/div/button').click()
-            print("关闭公告")
+            print("发现公告")
+            web.find_element(By.ID, 'n-card-header__close').click()
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
@@ -39,8 +39,8 @@ def search_more(web, word):
         except TimeoutException:
             pass
         if web.find_element(By.CSS_SELECTOR, ".n-card"):
-            web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[3]/div/button').click()
-            print("关闭公告")
+            print("发现公告")
+            web.find_element(By.ID, 'n-card-header__close').click()
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
