@@ -56,6 +56,8 @@ while True:
         if str(group) not in str(GROUPS):
             continue
 
+        print("获得消息")
+
         # 检查监听内容
         if msg.startwith("百科 "):  # 搜索百科
             keyword = msg.replace('百科 ', '')

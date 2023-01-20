@@ -94,8 +94,6 @@ def fetch_message_info(message):
                 groupinfo = senderinfo['group']
                 messageinfo.update(group=groupinfo['id'])
             message_c.append(messageinfo.copy())
-
-    print(message_c)
     if len(message_c) == 0:
         return 0
     else:
