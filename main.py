@@ -8,6 +8,7 @@ import botlink
 import moegirl_spider
 import simuse
 import sougou_spider
+import msg_sender
 
 CONFIG = pd.read_excel('./config.xls', index_col=0, dtype='object')
 
@@ -56,14 +57,12 @@ while True:
         if str(group) not in str(GROUPS):
             continue
 
-        print("获得消息")
-
         # 检查监听内容
         if msg.startwith("百科 "):  # 搜索百科
             keyword = msg.replace('百科 ', '')
             img = 0
             if LITE_MODE == "是":
-                sender.send_str(group=group, session=SESSION, message='简略模式搜索中....', host=HOST)
+                msg_sender.send_str(group=group, session=SESSION, message='简略模式搜索中....', host=HOST)
 
                 # 获取图片
                 if DRIVER == "搜狗百科":
@@ -73,7 +72,7 @@ while True:
                 else:
                     raise Exception("WTF? 你填了什么?")
             elif LITE_MODE == "否":
-                sender.send_str(group=group, session=SESSION, message='详细模式搜索中....等待时间可能较长',
+                msg_sender.send_str(group=group, session=SESSION, message='详细模式搜索中....等待时间可能较长',
                                 host=HOST)
 
                 # 获取图片
@@ -86,38 +85,38 @@ while True:
 
                 # 检查图片
                 if img == 0:
-                    sender.send_str(group=group, session=SESSION, message='搜索出错，该词条未收录', host=HOST)
+                    msg_sender.send_str(group=group, session=SESSION, message='搜索出错，该词条未收录', host=HOST)
                     continue
             # 检查图片
             if img == 0:
-                sender.send_str(group=group, session=SESSION, message='搜索出错，该词条未收录', host=HOST)
+                msg_sender.send_str(group=group, session=SESSION, message='搜索出错，该词条未收录', host=HOST)
                 continue
 
             print('Sending Image..')
             t1 = time.time()
-            sender.send_image(group=group, session=SESSION, message=img, host=HOST)
+            msg_sender.send_image(group=group, session=SESSION, message=img, host=HOST)
             print('Sent! [{}s]'.format(time.time() - t1))
         elif msg == '/切换模式':  # 更换搜索模式
             if sender in ADMIN_QQ:
                 if LITE_MODE == '是':
                     LITE_MODE = '否'
-                    sender.send_str(group=group, session=SESSION, message='切换成功，当前为详细搜索', host=HOST)
+                    msg_sender.send_str(group=group, session=SESSION, message='切换成功，当前为详细搜索', host=HOST)
                 else:
                     LITE_MODE = '是'
-                    sender.send_str(group=group, session=SESSION, message='切换成功，当前为简略搜索', host=HOST)
+                    msg_sender.send_str(group=group, session=SESSION, message='切换成功，当前为简略搜索', host=HOST)
             else:
-                sender.send_str(group=group, session=SESSION, message='只有管理员可以切换模式', host=HOST)
+                msg_sender.send_str(group=group, session=SESSION, message='只有管理员可以切换模式', host=HOST)
         elif msg == '/切换引擎':  # 更换搜索引擎
             if sender in ADMIN_QQ:
                 if DRIVER == '搜狗百科':
                     DRIVER = '萌娘百科'
-                    sender.send_str(group=group, session=SESSION, message='当前引擎切换为萌娘百科', host=HOST)
+                    msg_sender.send_str(group=group, session=SESSION, message='当前引擎切换为萌娘百科', host=HOST)
                 elif DRIVER == '萌娘百科':
                     DRIVER = '搜狗百科'
-                    sender.send_str(group=group, session=SESSION, message='当前引擎切换为搜狗百科', host=HOST)
+                    msg_sender.send_str(group=group, session=SESSION, message='当前引擎切换为搜狗百科', host=HOST)
                     WEB_DRIVER.get('https://baike.sogou.com/')
             else:
-                sender.send_str(group=group, session=SESSION, message='只有管理员可以切换引擎', host=HOST)
+                msg_sender.send_str(group=group, session=SESSION, message='只有管理员可以切换引擎', host=HOST)
     except Exception:
         continue
 
