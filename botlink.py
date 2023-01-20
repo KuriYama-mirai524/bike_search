@@ -1,10 +1,8 @@
 import requests
 
 
-def linkbot(key, port, botqq, host):
+def linkbot(key, botqq, host):
     # 连接到bot
-    host = 'http://' + str(host) + ':' + str(port)
-
     resp = requests.request('post', host + '/verify', json=key)
     print('获取会话...')
     if resp.json()['code'] == 400:

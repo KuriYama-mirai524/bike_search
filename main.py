@@ -14,10 +14,9 @@ CONFIG = pd.read_excel('./config.xls', index_col=0, dtype='object')
 GROUPS = CONFIG['添加的群'].values
 ADMIN_QQ = CONFIG['管理员账号'].values
 KEY = CONFIG['Http KEY'][0]
-HOST = CONFIG['HOST'][0]
-PORT = CONFIG['PORT'][0]
 BOT_QQ = CONFIG['BOT QQ'][0]
 DRIVER = CONFIG['搜索引擎'][0]
+HOST = "http://{}:{}".format(CONFIG['HOST'][0], CONFIG['PORT'][0])
 
 if CONFIG['是否使用简略信息'][0] == "是":
     LITE_MODE = True
@@ -29,7 +28,7 @@ print('简略模式:', LITE_MODE)
 KEY = dict(verifyKey=KEY)
 
 # 连接bot
-SESSION, _ = botlink.linkbot(key=KEY, host=HOST, port=PORT, botqq=BOT_QQ)
+SESSION, _ = botlink.linkbot(key=KEY, host=HOST, botqq=BOT_QQ)
 print('启用该功能的群:', GROUPS)
 
 # 打开浏览器, 准备截图
