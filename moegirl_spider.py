@@ -1,3 +1,5 @@
+import time
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,6 +17,7 @@ def search_less(web, word):
             if web.find_element(By.CSS_SELECTOR, ".n-card"):
                 print("发现公告")
                 web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[1]/button').click()
+                time.sleep(0.6)
         except:
             pass
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
@@ -45,6 +48,7 @@ def search_more(web, word):
             if web.find_element(By.CSS_SELECTOR, ".n-card"):
                 print("发现公告")
                 web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[1]/button').click()
+                time.sleep(0.6)
         except:
             pass
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))

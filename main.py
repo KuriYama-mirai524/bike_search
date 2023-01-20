@@ -62,7 +62,7 @@ while True:
 
         # 检查监听内容
         if "萌娘百科 " in msg:
-            keyword = msg.replace('百科 ', '')
+            keyword = msg.replace('萌娘百科 ', '')
             img = 0
             if LITE_MODE:
                 msg_sender.send_str(group=group, session=SESSION, message='简略模式搜索中....', host=HOST)
