@@ -61,7 +61,27 @@ while True:
             continue
 
         # 检查监听内容
-        if "百科 " in msg:  # 搜索百科
+        if "萌娘百科 " in msg:
+            keyword = msg.replace('百科 ', '')
+            img = 0
+            if LITE_MODE:
+                msg_sender.send_str(group=group, session=SESSION, message='简略模式搜索中....', host=HOST)
+                img = moegirl_spider.search_less(web=WEB_DRIVER, word=keyword)
+            else:
+                msg_sender.send_str(group=group, session=SESSION, message='详细模式搜索中....等待时间可能较长',
+                                    host=HOST)
+                img = moegirl_spider.search_more(web=WEB_DRIVER, word=keyword)
+
+            # 检查图片
+            if img == 0:
+                msg_sender.send_str(group=group, session=SESSION, message='搜索出错，该词条未收录', host=HOST)
+                continue
+
+            print('Sending Image..')
+            t1 = time.time()
+            msg_sender.send_image(group=group, session=SESSION, message=img, host=HOST)
+            print('Sent! [{}s]'.format(time.time() - t1))
+        elif "百科 " in msg:  # 搜索百科
             keyword = msg.replace('百科 ', '')
             img = 0
             if LITE_MODE:
@@ -86,10 +106,6 @@ while True:
                 else:
                     raise Exception("WTF? 你填了什么?")
 
-                # 检查图片
-                if img == 0:
-                    msg_sender.send_str(group=group, session=SESSION, message='搜索出错，该词条未收录', host=HOST)
-                    continue
             # 检查图片
             if img == 0:
                 msg_sender.send_str(group=group, session=SESSION, message='搜索出错，该词条未收录', host=HOST)
