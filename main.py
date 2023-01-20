@@ -61,7 +61,7 @@ while True:
         if "百科 " in msg:  # 搜索百科
             keyword = msg.replace('百科 ', '')
             img = 0
-            if LITE_MODE == "是":
+            if LITE_MODE:
                 msg_sender.send_str(group=group, session=SESSION, message='简略模式搜索中....', host=HOST)
 
                 # 获取图片
@@ -71,7 +71,7 @@ while True:
                     img = moegirl_spider.search_less(web=WEB_DRIVER, word=keyword)
                 else:
                     raise Exception("WTF? 你填了什么?")
-            elif LITE_MODE == "否":
+            else:
                 msg_sender.send_str(group=group, session=SESSION, message='详细模式搜索中....等待时间可能较长',
                                 host=HOST)
 
@@ -98,12 +98,8 @@ while True:
             print('Sent! [{}s]'.format(time.time() - t1))
         elif '/切换模式' in msg:  # 更换搜索模式
             if sender in ADMIN_QQ:
-                if LITE_MODE == '是':
-                    LITE_MODE = '否'
-                    msg_sender.send_str(group=group, session=SESSION, message='切换成功，当前为详细搜索', host=HOST)
-                else:
-                    LITE_MODE = '是'
-                    msg_sender.send_str(group=group, session=SESSION, message='切换成功，当前为简略搜索', host=HOST)
+                LITE_MODE = not LITE_MODE
+                msg_sender.send_str(group=group, session=SESSION, message='切换成功', host=HOST)
             else:
                 msg_sender.send_str(group=group, session=SESSION, message='只有管理员可以切换模式', host=HOST)
         elif '/切换引擎' in msg:  # 更换搜索引擎
