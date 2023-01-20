@@ -33,7 +33,7 @@ def check_session(host, session, qq):
     data_in = dict(sessionKey=session, qq=qq)
     res = r.request('post', url, json=data_in)
     res = json.loads(res.text)
-    return (res['code'])
+    return res['code']
 
 
 # 取得会话ID  (getsession:传入不为0的int值可让函数返回已激活的会话ID)
