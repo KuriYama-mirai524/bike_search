@@ -58,7 +58,7 @@ while True:
             continue
 
         # 检查监听内容
-        if msg.startwith("百科 "):  # 搜索百科
+        if "百科 " in msg:  # 搜索百科
             keyword = msg.replace('百科 ', '')
             img = 0
             if LITE_MODE == "是":
@@ -96,7 +96,7 @@ while True:
             t1 = time.time()
             msg_sender.send_image(group=group, session=SESSION, message=img, host=HOST)
             print('Sent! [{}s]'.format(time.time() - t1))
-        elif msg == '/切换模式':  # 更换搜索模式
+        elif '/切换模式' in msg:  # 更换搜索模式
             if sender in ADMIN_QQ:
                 if LITE_MODE == '是':
                     LITE_MODE = '否'
@@ -106,7 +106,7 @@ while True:
                     msg_sender.send_str(group=group, session=SESSION, message='切换成功，当前为简略搜索', host=HOST)
             else:
                 msg_sender.send_str(group=group, session=SESSION, message='只有管理员可以切换模式', host=HOST)
-        elif msg == '/切换引擎':  # 更换搜索引擎
+        elif '/切换引擎' in msg:  # 更换搜索引擎
             if sender in ADMIN_QQ:
                 if DRIVER == '搜狗百科':
                     DRIVER = '萌娘百科'
