@@ -13,7 +13,7 @@ def search_less(web, word):
             pass
         if web.find_element(By.CSS_SELECTOR, ".n-card"):
             print("发现公告")
-            web.find_element(By.ID, 'n-card-header__close').click()
+            web.find_element(By.ID, 'n-base-close').click()
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
@@ -40,7 +40,7 @@ def search_more(web, word):
             pass
         if web.find_element(By.CSS_SELECTOR, ".n-card"):
             print("发现公告")
-            web.find_element(By.ID, 'n-card-header__close').click()
+            web.find_element(By.ID, 'n-base-close').click()
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
