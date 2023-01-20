@@ -36,7 +36,7 @@ def search_less(web, word):
 
 def search_more(web, word):
     try:
-        web.set_page_load_timeout(5)
+        web.set_page_load_timeout(12)
         try:
             web.get('https://zh.moegirl.org.cn/' + word)
         except TimeoutException:
