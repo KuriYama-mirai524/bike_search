@@ -1,6 +1,7 @@
 import traceback
 import warnings
 
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -8,7 +9,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 def search_less(web, word):
     try:
-        web.get('https://zh.moegirl.org.cn/' + word)
+        try:
+            web.get('https://zh.moegirl.org.cn/' + word)
+        except TimeoutException:
+            pass
         print("Start wait...")
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
@@ -27,7 +31,10 @@ def search_less(web, word):
 
 def search_more(web, word):
     try:
-        web.get('https://zh.moegirl.org.cn/' + word)
+        try:
+            web.get('https://zh.moegirl.org.cn/' + word)
+        except TimeoutException:
+            pass
         print("Start wait...")
         element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")

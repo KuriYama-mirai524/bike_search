@@ -43,6 +43,7 @@ OPTIONS.add_argument('--no-sandbox')
 
 WEB_DRIVER = webdriver.Chrome(options=OPTIONS)
 WEB_DRIVER.get('https://baike.sogou.com/')
+WEB_DRIVER.set_page_load_timeout(10)
 print("Launch successful")
 
 # 开始监听会话
