@@ -58,6 +58,7 @@ while True:
         msg = msg[0]['messagechain'][1]['text']
 
         if str(group) not in str(GROUPS):
+            time.sleep(0.5)
             continue
 
         # 检查监听内容
@@ -135,4 +136,4 @@ while True:
     except Exception as e:
         print('发生了一个错误: '+str(e))
 
-    time.sleep(1)
+    time.sleep(0.5)
