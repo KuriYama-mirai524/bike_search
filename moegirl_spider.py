@@ -2,7 +2,7 @@ import time
 from urllib.parse import urlencode, quote_plus
 
 import requests
-from selenium.common import TimeoutException
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
