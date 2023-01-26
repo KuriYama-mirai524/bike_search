@@ -95,7 +95,7 @@ def find_wiki(web, word, ignoreTimeout=False):
     try:
         web.get(str(search_result[3][0]))
     except TimeoutException as e:
-        if ignoreTimeout:
+        if not ignoreTimeout:
             raise e
 
 
