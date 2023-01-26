@@ -17,6 +17,11 @@ SEARCH_PAYLOAD = {
     "namespace": 0,
     "limit": 10
 }
+REMOVEABLE_EMELEMTS = ["moe-global-header", "moe-global-footer", "moe-global-toolbar",
+                       "moe-open-in-app", "moe-float-toc-container", "moe-global-background",
+                       "moe-a11y-navigations", "moe-global-siderail", "moe-topbanner-container",
+                       "MOE_DRAW_LOTS_ROOT", "bottomRightCorner", "moe-page-tools-container",
+                       "moe-after-content"]
 
 REQUEST_HEADER.update(
     {
@@ -40,6 +45,7 @@ def search_less(web, word):
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
         web.set_window_size(1920, 1080)
+        web.execute_script(remove_elements())
         img = element.screenshot_as_base64
         js = '''
                 document.getElementById('mw-body').remove() '''
@@ -63,6 +69,7 @@ def search_more(web, word):
         WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
+        web.execute_script(remove_elements())
         if element.size['height'] > 8000:
             web.set_window_size(element.size['width'], 8000)
         else:
@@ -102,4 +109,23 @@ def find_wiki(web, word, ignoreTimeout=False):
 def get_search_payload(word):
     _search_payload = SEARCH_PAYLOAD
     _search_payload["search"] = word
-    return "?"+urlencode(_search_payload, quote_via=quote_plus)
+    return "?" + urlencode(_search_payload, quote_via=quote_plus)
+
+
+def remove_elements():
+    _script = ""
+    for i in REMOVEABLE_EMELEMTS:
+        _script += "document.getElementById('" + i + "').remove();\n"
+
+    _script += """
+var childs = document.getElementById("moe-main-container").children;
+for (i=0; i<childs.length; i++) {
+    if (childs[i].classList[0] != "moe-flexible-container") {
+        childs[i].remove();
+    }
+}"""
+    return _script
+
+
+if __name__ == "__main__":
+    print(remove_elements())
