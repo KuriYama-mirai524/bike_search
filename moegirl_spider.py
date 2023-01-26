@@ -2,6 +2,7 @@ import time
 from urllib.parse import urlencode, quote_plus
 
 import requests
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -32,7 +33,7 @@ def search_less(web, word):
     try:
         web.set_page_load_timeout(5)
 
-        find_wiki(web, word)
+        find_wiki(web, word, True)
         find_announce(web)
 
         WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
@@ -56,7 +57,7 @@ def search_more(web, word):
     try:
         web.set_page_load_timeout(12)
 
-        find_wiki(web, word)
+        find_wiki(web, word, True)
         find_announce(web)
 
         WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
@@ -89,9 +90,13 @@ def find_announce(web):
         pass
 
 
-def find_wiki(web, word):
+def find_wiki(web, word, ignoreTimeout=False):
     search_result = requests.get(MOEGIRL_API + get_search_payload(word), headers=REQUEST_HEADER).json()
-    web.get(str(search_result[3][0]))
+    try:
+        web.get(str(search_result[3][0]))
+    except TimeoutException as e:
+        if ignoreTimeout:
+            raise e
 
 
 def get_search_payload(word):
