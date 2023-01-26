@@ -65,6 +65,7 @@ while True:
     try:
         if str(group) not in str(GROUPS):
             time.sleep(0.5)
+            continue
 
         # 检查监听内容
         if "萌娘百科 " in msg:
