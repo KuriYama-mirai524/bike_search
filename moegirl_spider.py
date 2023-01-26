@@ -20,6 +20,10 @@ SEARCH_PAYLOAD = {
 REQUEST_HEADER.update(
     {
         'User-Agent': USER_AGENT,
+        "Referer": "https://zh.moegirl.org.cn/",
+        "X-Requested-With": "XMLHttpRequest",
+        "Origin": "https://zh.moegirl.org.cn",
+        "Accept": "application/json, text/javascript, */*; q=0.01"
     }
 )
 
