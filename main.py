@@ -51,12 +51,16 @@ while True:
     msg = simuse.fetch_message(host=HOST, session=SESSION, deal=1)
 
     if msg == 0:
-        continue
+        time.sleep(0.5)
+
     try:
         group = msg[0]['group']
         sender = msg[0]['sender']
         msg = msg[0]['messagechain'][1]['text']
+    except:
+        time.sleep(0.5)
 
+    try:
         if str(group) not in str(GROUPS):
             time.sleep(0.5)
 
