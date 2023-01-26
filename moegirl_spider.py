@@ -1,29 +1,51 @@
 import time
+from urllib.parse import urlencode, quote_plus
 
+import requests
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0"
+REQUEST_HEADER = requests.utils.default_headers()
+MOEGIRL_API = "https://zh.moegirl.org.cn/api.php"
+SEARCH_PAYLOAD = {
+    "action": "opensearch",
+    "format": "json",
+    "formatversion": 2,
+    "namespace": 0,
+    "limit": 10
+}
+REMOVEABLE_EMELEMTS = ["moe-global-header", "moe-global-footer", "moe-global-toolbar",
+                       "moe-open-in-app", "moe-float-toc-container", "moe-global-background",
+                       "moe-a11y-navigations", "moe-global-siderail", "moe-topbanner-container",
+                       "MOE_DRAW_LOTS_ROOT", "bottomRightCorner", "moe-page-tools-container",
+                       "moe-after-content"]
+
+REQUEST_HEADER.update(
+    {
+        'User-Agent': USER_AGENT,
+        "Referer": "https://zh.moegirl.org.cn/",
+        "X-Requested-With": "XMLHttpRequest",
+        "Origin": "https://zh.moegirl.org.cn",
+        "Accept": "application/json, text/javascript, */*; q=0.01"
+    }
+)
+
 
 def search_less(web, word):
     try:
         web.set_page_load_timeout(5)
-        try:
-            web.get('https://zh.moegirl.org.cn/' + word)
-        except TimeoutException:
-            pass
-        try:
-            if web.find_element(By.CSS_SELECTOR, ".n-card"):
-                print("发现公告")
-                web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[1]/button').click()
-                time.sleep(0.6)
-        except:
-            pass
-        element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
+
+        find_wiki(web, word, True)
+        find_announce(web)
+
+        WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
         web.set_window_size(1920, 1080)
+        web.execute_script(remove_elements())
         img = element.screenshot_as_base64
         js = '''
                 document.getElementById('mw-body').remove() '''
@@ -32,7 +54,7 @@ def search_less(web, word):
         web.set_page_load_timeout(10)
         return img
     except Exception as e:
-        print('发生了一个错误: '+str(e))
+        print('发生了一个错误: ' + str(e))
         web.set_page_load_timeout(10)
         return 0
 
@@ -40,20 +62,14 @@ def search_less(web, word):
 def search_more(web, word):
     try:
         web.set_page_load_timeout(12)
-        try:
-            web.get('https://zh.moegirl.org.cn/' + word)
-        except TimeoutException:
-            pass
-        try:
-            if web.find_element(By.CSS_SELECTOR, ".n-card"):
-                print("发现公告")
-                web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[1]/button').click()
-                time.sleep(0.6)
-        except:
-            pass
-        element = WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
+
+        find_wiki(web, word, True)
+        find_announce(web)
+
+        WebDriverWait(web, 20).until(EC.presence_of_element_located((By.ID, 'mw-body')))
         print("Find mw-body!")
         element = web.find_element(By.ID, 'mw-body')
+        web.execute_script(remove_elements())
         if element.size['height'] > 8000:
             web.set_window_size(element.size['width'], 8000)
         else:
@@ -66,6 +82,50 @@ def search_more(web, word):
         web.set_page_load_timeout(10)
         return img
     except Exception as e:
-        print('发生了一个错误: '+str(e))
+        print('发生了一个错误: ' + str(e))
         web.set_page_load_timeout(10)
         return 0
+
+
+def find_announce(web):
+    try:
+        if web.find_element(By.CSS_SELECTOR, ".n-card"):
+            print("发现公告")
+            web.find_element(By.XPATH, '/html/body/div[2]/div/div/div[1]/div/div[3]/div[1]/button').click()
+            time.sleep(0.6)
+    except:
+        pass
+
+
+def find_wiki(web, word, ignoreTimeout=False):
+    search_result = requests.get(MOEGIRL_API + get_search_payload(word), headers=REQUEST_HEADER).json()
+    try:
+        web.get(str(search_result[3][0]))
+    except TimeoutException as e:
+        if not ignoreTimeout:
+            raise e
+
+
+def get_search_payload(word):
+    _search_payload = SEARCH_PAYLOAD
+    _search_payload["search"] = word
+    return "?" + urlencode(_search_payload, quote_via=quote_plus)
+
+
+def remove_elements():
+    _script = ""
+    for i in REMOVEABLE_EMELEMTS:
+        _script += "document.getElementById('" + i + "').remove();\n"
+
+    _script += """
+var childs = document.getElementById("moe-main-container").children;
+for (i=0; i<childs.length; i++) {
+    if (childs[i].classList[0] != "moe-flexible-container") {
+        childs[i].remove();
+    }
+}"""
+    return _script
+
+
+if __name__ == "__main__":
+    print(remove_elements())
