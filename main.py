@@ -52,6 +52,7 @@ while True:
 
     if msg == 0:
         time.sleep(0.5)
+        continue
 
     try:
         group = msg[0]['group']
@@ -59,6 +60,7 @@ while True:
         msg = msg[0]['messagechain'][1]['text']
     except:
         time.sleep(0.5)
+        continue
 
     try:
         if str(group) not in str(GROUPS):
