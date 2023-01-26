@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/109.0"
+REQUEST_HEADER = requests.utils.default_headers()
 MOEGIRL_API = "https://zh.moegirl.org.cn/api.php"
 SEARCH_PAYLOAD = {
     "action": "opensearch",
@@ -14,6 +16,12 @@ SEARCH_PAYLOAD = {
     "namespace": 0,
     "limit": 10
 }
+
+REQUEST_HEADER.update(
+    {
+        'User-Agent': USER_AGENT,
+    }
+)
 
 
 def search_less(web, word):
@@ -78,7 +86,7 @@ def find_announce(web):
 
 
 def find_wiki(web, word):
-    search_result = requests.get(MOEGIRL_API + get_search_payload(word)).json()
+    search_result = requests.get(MOEGIRL_API + get_search_payload(word), headers=REQUEST_HEADER).json()
     web.get(str(search_result[3][0]))
 
 
