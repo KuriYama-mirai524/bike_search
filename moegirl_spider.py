@@ -93,4 +93,4 @@ def find_wiki(web, word):
 def get_search_payload(word):
     _search_payload = SEARCH_PAYLOAD
     _search_payload["search"] = word
-    return urlencode(_search_payload, quote_via=quote_plus)
+    return "?"+urlencode(_search_payload, quote_via=quote_plus)
